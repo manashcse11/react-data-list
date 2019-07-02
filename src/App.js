@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import DataList from './components/list/DataList';
 
 class App extends Component {
     render (){
         return(
-            <div>Hello Manash</div>
+            <DataList />
         );
     }
 }
