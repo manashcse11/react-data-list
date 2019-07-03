@@ -6,17 +6,17 @@ class DataList extends Component {
         this.state = {
             error: null
             , isLoaded: false
-            , users: []
+            , movies: []
         }
     }
 
     componentDidMount(){
-        fetch("https://jsonplaceholder.typicode.com/posts")
+        fetch("https://api.themoviedb.org/3/movie/top_rated?api_key=cd890f94a756b1518a2a17617a5b430e&page=1")
         .then(response => response.json())
         .then(result => {
             this.setState({
                 isLoaded: true
-                , users: result
+                , movies: result.results
             });
             },
             error => {
@@ -29,7 +29,7 @@ class DataList extends Component {
     }
 
     render(){
-        const {error, isLoaded, users} = this.state;
+        const {error, isLoaded, movies} = this.state;
 
         if(error){
             return (<div>Error in loading</div>);
@@ -39,20 +39,23 @@ class DataList extends Component {
         }
         else{
             return(
-                <div>
-                    <ol>
+                <table id="example" className="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Vote average</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {
-                            users.map(user => (
-                                <li key={user.id} align="start">
-                                    <div>
-                                        <p>{user.title}</p>
-                                        <p>{user.body}</p>
-                                    </div>
-                                </li>
-                            ))
+                            movies.map(movie => 
+                                <tr key={movie.id}>
+                                    <td>{movie.title}</td>
+                                    <td>{movie.vote_average}</td>
+                                </tr>)
                         }
-                    </ol>
-                </div>
+                    </tbody>
+                </table>
             );
         }
     }
