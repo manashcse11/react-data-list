@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Table from './Table';
 
 class DataList extends Component {
     constructor(props){
@@ -39,23 +40,9 @@ class DataList extends Component {
         }
         else{
             return(
-                <table id="example" className="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Vote average</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            movies.map(movie => 
-                                <tr key={movie.id}>
-                                    <td>{movie.title}</td>
-                                    <td>{movie.vote_average}</td>
-                                </tr>)
-                        }
-                    </tbody>
-                </table>
+                <div>
+                    <Table movies = {movies} />
+                </div>
             );
         }
     }
